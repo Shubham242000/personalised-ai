@@ -1,18 +1,36 @@
-import { history, skills } from "../data/learning";
-import type { SidebarTab } from "../types/learning";
+import type { HistoryItem, Skill, SidebarTab } from "../types/learning";
 
 type SidebarProps = {
   activeTab: SidebarTab;
   onTabChange: (tab: SidebarTab) => void;
+  onNewSession: () => void;
+  skills: Skill[];
+  history: HistoryItem[];
+  onSelectHistory: (id?: string) => void;
+  selectedHistoryId?: string;
+  historyLoading?: boolean;
 };
 
-export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
+export function Sidebar({
+  activeTab,
+  onTabChange,
+  onNewSession,
+  skills,
+  history,
+  onSelectHistory,
+  selectedHistoryId,
+  historyLoading,
+}: SidebarProps) {
   return (
     <aside className="sidebar">
       <div>
         <p className="logo-label">Personalised Agent</p>
-        <h1 className="logo-name">LearnOS</h1>
+        <h1 className="logo-name">Personal Assistant</h1>
       </div>
+
+      <button className="new-session-btn" type="button" onClick={onNewSession}>
+        + New Session
+      </button>
 
       <div className="tab-bar">
         <button
@@ -38,17 +56,17 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
               <div className="avatar">S</div>
               <div>
                 <p className="profile-name">Shubham</p>
-                <p className="profile-sub">SDE-2 - 3 years exp</p>
+                <p className="profile-sub">Product · Design · Writing</p>
               </div>
             </div>
             <div className="level-row">
-              <span className="level-label">Current level</span>
+              <span className="level-label">Current profile</span>
               <span className="level-badge">Intermediate</span>
             </div>
           </section>
 
           <section>
-            <p className="section-label">Skill Profile</p>
+            <p className="section-label">Capability Profile</p>
             <div className="skill-row">
               {skills.map((skill) => (
                 <article key={skill.name} className="skill-item">
@@ -61,9 +79,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
                       className="skill-bar-fill"
                       style={{
                         width: `${(skill.level / 5) * 100}%`,
-                        background: skill.gap
-                          ? "linear-gradient(90deg, #e8956d, #d4704a)"
-                          : "#c4bdb3",
+                        background: skill.gap ? "#ff5c00" : "#9ca3af",
                       }}
                     />
                   </div>
@@ -74,10 +90,18 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
         </>
       ) : (
         <section>
-          <p className="section-label">Past Conversations</p>
+          <p className="section-label">Recent Sessions</p>
           <div className="history-list">
+            {historyLoading ? <p className="history-empty">Loading...</p> : null}
+            {!historyLoading && history.length === 0 ? (
+              <p className="history-empty">No conversations yet.</p>
+            ) : null}
             {history.map((item) => (
-              <article key={item.topic} className="history-item">
+              <article
+                key={item.id ?? item.topic}
+                className={`history-item ${selectedHistoryId === item.id ? "history-item-active" : ""}`}
+                onClick={() => onSelectHistory(item.id)}
+              >
                 <p className="history-topic">{item.topic}</p>
                 <p className="history-preview">{item.preview}</p>
                 <div className="history-footer">
@@ -88,8 +112,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
                         style={{
                           width: `${item.completion}%`,
                           height: "100%",
-                          background:
-                            item.completion === 100 ? "#4a9e72" : "#d4704a",
+                          background: "#388bfd",
                           borderRadius: "1px",
                         }}
                       />

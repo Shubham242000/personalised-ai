@@ -1,43 +1,43 @@
 import type { HistoryItem, QuickStart, Skill } from "../types/learning";
 
 export const skills: Skill[] = [
-  { name: "TypeScript", level: 3, gap: true },
-  { name: "React", level: 5, gap: false },
-  { name: "System Design", level: 2, gap: true },
-  { name: "Node.js", level: 4, gap: false },
-  { name: "CSS", level: 4, gap: false },
+  { name: "Research", level: 3, gap: true },
+  { name: "Writing", level: 5, gap: false },
+  { name: "Design", level: 2, gap: true },
+  { name: "Planning", level: 4, gap: false },
+  { name: "Execution", level: 4, gap: false },
 ];
 
 export const history: HistoryItem[] = [
   {
-    topic: "React useCallback deep dive",
+    topic: "Homepage messaging brief",
     time: "2h ago",
     completion: 85,
-    preview: "Covered memoization, dependency arrays, and when NOT to use it...",
+    preview: "Positioning options, tone variants, and hero copy directions...",
   },
   {
-    topic: "TypeScript utility types",
+    topic: "Design handoff checklist",
     time: "Yesterday",
     completion: 60,
-    preview: "Partial, Required, Pick, Omit - stopped before Conditional types",
+    preview: "Started structure and acceptance criteria, pending QA notes",
   },
   {
-    topic: "Zustand vs Redux",
+    topic: "Launch content plan",
     time: "2 days ago",
     completion: 100,
-    preview: "Full comparison, boilerplate analysis, when to use each",
+    preview: "Channel strategy, calendar, and writing workflow finalized",
   },
   {
-    topic: "Async/Await patterns",
+    topic: "Stakeholder update draft",
     time: "4 days ago",
     completion: 100,
-    preview: "Error handling, Promise.all, race conditions",
+    preview: "Executive summary, blockers, and next actions completed",
   },
 ];
 
 export const quickStarts: QuickStart[] = [
-  { label: "Fill my TypeScript gaps", icon: "⚡" },
-  { label: "Continue System Design path", icon: "🗺️" },
-  { label: "Quiz me on weak topics", icon: "🎯" },
-  { label: "What should I learn next?", icon: "✦" },
+  { label: "Draft a design brief", icon: "🧩" },
+  { label: "Write a product launch outline", icon: "✍️" },
+  { label: "Summarize competitor positioning", icon: "🔎" },
+  { label: "Plan next week priorities", icon: "📌" },
 ];

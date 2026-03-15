@@ -7,6 +7,7 @@ export type Skill = {
 };
 
 export type HistoryItem = {
+  id?: string;
   topic: string;
   time: string;
   completion: number;
